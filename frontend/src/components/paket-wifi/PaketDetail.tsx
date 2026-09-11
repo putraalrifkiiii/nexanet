@@ -1,5 +1,3 @@
-import React from "react";
-
 function PaketDetail() {
   return (
     <div className="bg-white min-h-screen">

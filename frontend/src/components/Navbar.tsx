@@ -1,6 +1,5 @@
 import { NAV_ITEMS } from "@/constants/navigation";
 import Button from "@/components/ui/Button";
-import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
