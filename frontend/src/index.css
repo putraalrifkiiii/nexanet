@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-dark: #07111f;
+  --color-brand-blue: #1456f0;
+  --color-brand-orange: #f26419;
+  --color-brand-offwhite: #f7f7f8;
+  --color-brand-muted: #9ca3af;
+  --color-brand-border: #e5e7eb;
+  --color-brand-border-dark: rgba(255, 255, 255, 0.08);
+  --color-brand-danger: #ef4444;
+  --color-brand-white: #ffffff;
+
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
