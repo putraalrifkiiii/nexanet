@@ -18,7 +18,6 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const combinedClasses = `${BUTTONBASESTYLES} ${BUTTONVARIANTS[variant]} ${BUTTONSIZES[size]} ${className}`;
 
-  // Jika properti 'to' diisi, render sebagai komponen <Link> dari react-router-dom
   if (to) {
     return (
       <Link to={to} className={combinedClasses}>
@@ -27,7 +26,6 @@ const Button: React.FC<ButtonProps> = ({
     );
   }
 
-  // Jika tidak, render sebagai elemen <button> biasa
   return (
     <button type={type} onClick={onClick} className={combinedClasses}>
       {children}

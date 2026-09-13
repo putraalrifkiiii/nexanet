@@ -4,7 +4,7 @@ export interface ButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "outline" | "danger";
   size?: "sm" | "md" | "lg";
-  to?: string; // Otomatis merender <Link> jika diisi
+  to?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   className?: string;
