@@ -1,16 +1,18 @@
 FROM php:8.3-apache
 
-# Install ekstensi PHP yang biasa dipakai Laravel
+# Install ekstensi PHP yang biasa dipakai Laravel (termasuk intl dan zip)
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libicu-dev \
+    libzip-dev \
     zip \
     unzip \
     git \
     curl
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
