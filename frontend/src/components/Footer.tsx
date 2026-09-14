@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FOOTER_DATA } from "@/constants/footer";
 
 const Footer = () => {
   return (
@@ -31,31 +32,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-10">
-              {[
-                {
-                  label: "Layanan",
-                  links: [
-                    ["Paket WiFi", "/paket-wifi"],
-                    ["Berlangganan", "/langganan"],
-                    ["Pengaduan", "/pengaduan"],
-                  ],
-                },
-                {
-                  label: "Perusahaan",
-                  links: [
-                    ["Tentang Kami", "/tentang-kami"],
-                    ["Bantuan", "/bantuan"],
-                  ],
-                },
-                {
-                  label: "Kontak",
-                  links: [
-                    ["(021) 1500-6392", ""],
-                    ["cs@nexanet.id", ""],
-                    ["Jakarta, Indonesia", ""],
-                  ],
-                },
-              ].map((col) => (
+              {FOOTER_DATA.map((col) => (
                 <div key={col.label}>
                   <div className="uppercase tracking-widest mb-4 font-mono text-[rgba(255,255,255,0.2)] text-xs">
                     {col.label}
