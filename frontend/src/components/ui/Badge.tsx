@@ -1,4 +1,9 @@
-export default function Badge({ text, indicatorColor }) {
+interface BadgeProps {
+  text: string;
+  indicatorColor?: string;
+}
+
+export default function Badge({ text, indicatorColor }: BadgeProps) {
   return (
     <div className="inline-flex items-center mb-8 gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(255,255,255,0.1)] backdrop-blur-md ">
       <span

@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "@/components/ui/Button";
 import StatCard from "@/components/ui/StatCard";
 import Badge from "@/components/ui/Badge";
