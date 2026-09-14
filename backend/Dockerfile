@@ -29,6 +29,9 @@ RUN echo '<Directory /var/www/html/public/>\n\
     Require all granted\n\
 </Directory>' >> /etc/apache2/apache2.conf
 
+# Install Composer secara resmi di dalam Docker
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 WORKDIR /var/www/html
 COPY . .
 
