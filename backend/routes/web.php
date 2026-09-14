@@ -1,6 +1,10 @@
 <?php
 
-use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'welcome')->name('home');
+Route::get('/', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'NexaNet Backend API is running smoothly!',
+    ]);
+});
