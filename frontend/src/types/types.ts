@@ -19,6 +19,7 @@ export interface PaketWifi {
   slug: string;
   kecepatan_mbps: number;
   harga: number;
+  biaya_pemasangan: number;
   deskripsi_paket: string;
 }
 
