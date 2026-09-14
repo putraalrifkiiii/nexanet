@@ -6,7 +6,7 @@ import type { PaketWifi } from "@/types/types";
  */
 export async function fetchPaketWifi(): Promise<PaketWifi[]> {
   try {
-    const API_URL = "http://localhost:8000/api/paket-wifi";
+    const API_URL = "https://nexanet-backend.onrender.com/api/paket-wifi";
 
     const response = await fetch(API_URL, {
       method: "GET",
