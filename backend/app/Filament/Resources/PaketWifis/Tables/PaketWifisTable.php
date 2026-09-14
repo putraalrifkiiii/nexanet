@@ -8,10 +8,9 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-
 
 class PaketWifisTable
 {
@@ -30,6 +29,9 @@ class PaketWifisTable
                 TextColumn::make('harga')
                     ->label('Harga')
                     ->sortable()
+                    ->money('idr'),
+                TextColumn::make('biaya_pemasangan')
+                    ->label('Biaya Pemasangan')
                     ->money('idr'),
                 TextColumn::make('deskripsi_paket')
                     ->label('Deskripsi')

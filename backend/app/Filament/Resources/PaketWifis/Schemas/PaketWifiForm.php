@@ -26,6 +26,12 @@ class PaketWifiForm
                     ->step(50000)
                     ->prefix('Rp ')
                     ->suffix(',-'),
+                TextInput::make('biaya_pemasangan')
+                    ->required()
+                    ->numeric()
+                    ->step(50000)
+                    ->prefix('Rp ')
+                    ->suffix(',-'),
                 Textarea::make('deskripsi_paket')
                     ->maxLength(255)
                     ->placeholder('Contoh: Paket internet dengan kecepatan tinggi untuk streaming dan gaming.'),

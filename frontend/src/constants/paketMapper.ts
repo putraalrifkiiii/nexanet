@@ -8,7 +8,6 @@ export interface PaketUI extends PaketWifi {
 
 export function mapPaketToUI(dataApi: PaketWifi[]): PaketUI[] {
   return dataApi.map((pkg) => {
-    // Generate fitur berdasarkan kecepatan atau slug dari database
     const fiturDefault = [
       `${pkg.kecepatan_mbps} Mbps unduh & unggah`,
       "Kuota tidak terbatas",
@@ -24,7 +23,7 @@ export function mapPaketToUI(dataApi: PaketWifi[]): PaketUI[] {
     return {
       ...pkg,
       fitur: fiturDefault,
-      top: pkg.slug === "home" || pkg.kecepatan_mbps === 20, // Contoh penanda paket populer
+      top: pkg.slug === "home" || pkg.kecepatan_mbps === 20,
     };
   });
 }

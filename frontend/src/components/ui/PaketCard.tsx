@@ -34,7 +34,7 @@ const PaketCard = () => {
         const dataApi = await fetchPaketWifi();
         setPkgs(mapPaketToUI(dataApi));
       } catch {
-        setError("Paket internet belum dapat dimuat.");
+        setError("Paket internet belum dapat dimuat bro.");
       } finally {
         setIsLoading(false);
       }
@@ -68,16 +68,11 @@ const PaketCard = () => {
           <p className="text-sm font-body text-brand-danger">{error}</p>
         )}
         {!isLoading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-15">
             {pkgs.map((pkg) => (
               <div
                 key={pkg.id}
-                style={{
-                  borderRadius: 16,
-                  background: pkg.top ? C.dark : C.white,
-                  border: pkg.top ? "none" : `1px solid ${C.border}`,
-                }}
-                className="p-6 flex flex-col"
+                className={`p-6 flex flex-col rounded-2xl ${pkg.top ? "bg-brand-dark border-none" : "bg-brand-white border border-brand-border"}`}
               >
                 {pkg.top && (
                   <div className="uppercase tracking-widest px-2.5 py-1 self-start mb-6 font-mono text-[9px] text-brand-blue bg-[rgba(20,86,240,0.15)] rounded-full">
@@ -85,64 +80,36 @@ const PaketCard = () => {
                   </div>
                 )}
                 <div
-                  style={{
-                    fontFamily: F.mono,
-                    fontSize: 10,
-                    color: pkg.top ? "rgba(255,255,255,0.25)" : C.muted,
-                  }}
-                  className="uppercase tracking-widest mb-3 font-mono text-[10px]"
+                  className={`uppercase tracking-widest mb-3 font-mono text-[10px] ${pkg.top ? "text-[rgba(255,255,255,0.25)]" : "text-brand-muted"}`}
                 >
                   NexaNet {pkg.nama_paket}
                 </div>
                 <div
-                  style={{
-                    fontFamily: F.display,
-                    color: pkg.top ? C.white : C.dark,
-                  }}
-                  className="text-6xl font-black leading-none mb-1 font-display "
+                  className={`text-6xl font-black leading-none mb-1 font-display ${pkg.top ? "text-brand-white" : "text-brand-dark"}`}
                 >
                   {pkg.kecepatan_mbps}
                 </div>
                 <div
-                  style={{
-                    fontFamily: F.body,
-                    color: pkg.top ? "rgba(255,255,255,0.3)" : C.muted,
-                  }}
-                  className="text-sm mb-4 font-body "
+                  className={`text-sm mb-4 font-body ${pkg.top ? "text-[rgba(255,255,255,0.3)]" : "text-brand-muted"}`}
                 >
                   Mbps
                 </div>
                 <div
-                  style={{
-                    fontFamily: F.display,
-                    color: pkg.top ? "rgba(255,255,255,0.9)" : C.dark,
-                  }}
-                  className="text-2xl font-black mb-0.5 font-display"
+                  className={`text-2xl font-black mb-0.5 font-display ${pkg.top ? "text-[rgba(255,255,255,0.9)]" : "text-brand-dark"}`}
                 >
                   {idr(pkg.harga)}
                 </div>
                 <div
-                  style={{
-                    fontFamily: F.body,
-                    color: pkg.top ? "rgba(255,255,255,0.25)" : C.muted,
-                  }}
-                  className="text-xs mb-1 font-body"
+                  className={`text-xs mb-1 font-body ${pkg.top ? "text-[rgba(255,255,255,0.25)]" : "text-brand-muted"}`}
                 >
                   per bulan
                 </div>
                 <div
-                  style={{
-                    fontFamily: F.body,
-                    color: pkg.top ? "rgba(255,255,255,0.3)" : C.muted,
-                  }}
-                  className="text-xs mb-4 font-body "
+                  className={`text-xs mb-4 font-body ${pkg.top ? "text-[rgba(255,255,255,0.3)]" : "text-brand-muted"}`}
                 >
-                  Biaya pasang:{" "}
+                  Biaya pasang:
                   <span
-                    style={{
-                      color: pkg.top ? "rgba(255,255,255,0.6)" : C.dark,
-                      fontWeight: 600,
-                    }}
+                    className={`font-semibold ${pkg.top ? "text-[rgba(255,255,255,0.6)]" : "text-brand-dark"}`}
                   >
                     Hubungi kami
                   </span>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['nama_paket', 'slug', 'kecepatan_mbps', 'harga', 'deskripsi_paket'])]
+#[Fillable(['nama_paket', 'slug', 'kecepatan_mbps', 'harga', 'biaya_pemasangan', 'deskripsi_paket'])]
 class PaketWifi extends Model
 {
     use SoftDeletes;
