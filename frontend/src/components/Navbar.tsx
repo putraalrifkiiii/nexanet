@@ -15,9 +15,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-md border-b  border-brand-muted bg-white/80">
+    <nav className="sticky top-0 z-50 backdrop-blur-md border-b  border-brand-blue bg-white/80">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
             <rect width="22" height="22" rx="6" className="fill-brand-blue" />
@@ -57,7 +56,7 @@ export default function Navbar() {
               >
                 Dashboard
               </Link>
-              <Button variant="outline" size="sm" onClick={handleLogout}>
+              <Button variant="primary" size="sm" onClick={handleLogout}>
                 Keluar
               </Button>
             </>
@@ -69,7 +68,7 @@ export default function Navbar() {
               >
                 Masuk
               </Link>
-              <Button to="/daftar" variant="secondary" size="sm">
+              <Button to="/daftar" variant="primary" size="sm">
                 Daftar
               </Button>
             </>
@@ -109,7 +108,7 @@ export default function Navbar() {
               key={path}
               to={path}
               onClick={() => setOpen(false)}
-              className="text-left text-sm font-medium font-body text-brand-dark"
+              className="text-left text-sm font-medium font-body text-brand-dark hover:translate-x-1 hover:text-brand-blue "
             >
               {label}
             </Link>
@@ -126,14 +125,14 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={() => setOpen(false)}
-                className="text-left text-sm font-body text-gray-600"
+                className="text-left text-sm font-body text-gray-600 hover:translate-x-1 hover:text-brand-blue"
               >
                 Masuk
               </Link>
               <Link
                 to="/daftar"
                 onClick={() => setOpen(false)}
-                className="text-left text-sm font-semibold font-body text-brand-blue"
+                className="text-left text-sm font-semibold font-body text-brand-blue hover:translate-x-1 hover:text-brand-blue"
               >
                 Daftar
               </Link>
