@@ -1,4 +1,5 @@
 import React from "react";
+import type { FieldInputProps } from "../../types/component";
 
 function FieldInput({
   label,
@@ -8,15 +9,7 @@ function FieldInput({
   placeholder,
   error,
   action,
-}: {
-  label: string;
-  type?: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  error?: string;
-  action?: React.ReactNode;
-}) {
+}: FieldInputProps) {
   return (
     <div>
       <div className="flex justify-between mb-2">

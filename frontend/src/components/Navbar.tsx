@@ -2,14 +2,15 @@ import { NAV_ITEMS } from "@/constants/navigation";
 import Button from "@/components/ui/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { loggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setLoggedIn(false);
+    logout();
     navigate("/");
     setOpen(false);
   };

@@ -1,4 +1,3 @@
-import React from "react";
 import type { AuthShellProps } from "@/types/auth";
 import LogoBrand from "./ui/LogoBrand";
 

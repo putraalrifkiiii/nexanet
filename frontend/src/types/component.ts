@@ -8,3 +8,13 @@ export interface ButtonProps {
   className?: string;
   disabled?: boolean;
 }
+
+export interface FieldInputProps {
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  error?: string;
+  action?: React.ReactNode;
+}

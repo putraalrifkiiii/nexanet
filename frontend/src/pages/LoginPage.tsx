@@ -1,17 +1,15 @@
 import AuthShell from "@/components/AuthShell";
 import FieldInput from "@/components/ui/FieldInput";
+import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({
-  setPage,
-  setLoggedIn,
-}: {
-  setPage: (p: Page) => void;
-  setLoggedIn: (v: boolean) => void;
-}) => {
-  const [email, setEmail] = useState(""),
-    [pass, setPass] = useState(""),
-    [err, setErr] = useState("");
+const LoginPage = () => {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [err, setErr] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -23,13 +21,13 @@ const LoginPage = ({
               setErr("Email dan password wajib diisi.");
               return;
             }
-            setLoggedIn(true);
-            setPage("dashboard");
+            login();
+            navigate("/dashboard");
           }}
           className="space-y-4"
         >
           {err && (
-            <div className="text-xs p-3 font-body text-[#EF4444] bg-[#FFF5F5] border-[#FCA5A5] rounded-[10px]">
+            <div className="text-xs p-3 font-body text-brand-d bg-[#FFF5F5] border-[#FCA5A5] rounded-[10px]">
               {err}
             </div>
           )}
@@ -65,7 +63,7 @@ const LoginPage = ({
         <p className="text-xs text-center mt-8 font-body text-brand-muted">
           Belum punya akun?{" "}
           <button
-            onClick={() => setPage("daftar")}
+            onClick={() => navigate("/daftar")}
             className="font-semibold hover:underline text-brand-blue"
           >
             Daftar sekarang
