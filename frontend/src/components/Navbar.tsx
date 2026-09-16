@@ -15,7 +15,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-md border-b  border-brand-blue bg-white/80">
+    <nav className="sticky top-0 z-50 backdrop-blur-md border-b  border-brand-blue bg-white/80 ">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -102,7 +102,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {open && (
-        <div className="md:hidden bg-white px-5 py-5 flex flex-col gap-5 border-t border-brand-border">
+        <div className="md:hidden bg-white px-5 py-5 flex flex-col gap-5 border-t border-brand-border  ">
           {NAV_ITEMS.map(({ path, label }) => (
             <Link
               key={path}
