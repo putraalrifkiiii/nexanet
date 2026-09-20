@@ -1,4 +1,3 @@
-import React from "react";
 import type { FieldInputProps } from "../../types/component";
 
 function FieldInput({
