@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 interface AuthContextType {
   loggedIn: boolean;
+  register: () => void;
   login: () => void;
   logout: () => void;
 }
@@ -19,13 +20,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setLoggedIn(true);
   };
 
+  const register = () => {
+    localStorage.setItem("isLoggedIn", "true");
+    setLoggedIn(true);
+  };
+
   const logout = () => {
     localStorage.removeItem("isLoggedIn");
     setLoggedIn(false);
   };
 
   return (
-    <AuthContext.Provider value={{ loggedIn, login, logout }}>
+    <AuthContext.Provider value={{ loggedIn, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

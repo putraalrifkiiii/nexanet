@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import AuthShell from "@/components/AuthShell";
 import FieldInput from "@/components/ui/FieldInput";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
-const RegisterPage = ({
-  setPage,
-  setLoggedIn,
-}: {
-  setPage: (p: Page) => void;
-  setLoggedIn: (v: boolean) => void;
-}) => {
+const RegisterPage = () => {
+  const { register } = useAuth();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     nama: "",
     alamat: "",
@@ -57,8 +55,8 @@ const RegisterPage = ({
             }
             setDone(true);
             setTimeout(() => {
-              setLoggedIn(true);
-              setPage("dashboard");
+              register();
+              navigate("/dashboard");
             }, 1200);
           }}
           className="space-y-4"
@@ -98,7 +96,7 @@ const RegisterPage = ({
         <p className="text-xs text-center mt-8 font-body text-brand-muted">
           Sudah punya akun?{" "}
           <button
-            onClick={() => setPage("login")}
+            onClick={() => navigate("/login")}
             className="font-semibold hover:underline text-brand-blue"
           >
             Masuk
