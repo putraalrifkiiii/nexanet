@@ -44,4 +44,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 EXPOSE 80
 
 # Gunakan script startup agar artisan command dijalankan saat container NYALA (bukan saat build)
-CMD ["sh", "-c", "php artisan config:clear && php artisan cache:clear && php artisan filament:assets --ansi && apache2-foreground"]
+CMD ["sh", "-c", "php artisan config:clear && php artisan cache:clear && php artisan filament:assets --ansi && php artisan storage:link && apache2-foreground"]
