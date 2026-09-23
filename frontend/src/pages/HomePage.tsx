@@ -6,6 +6,7 @@ import { PaketCard } from "@/components/paket-wifi";
 import { useState, useEffect } from "react";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
 import { fetchPaketWifi } from "@/api/paketApi";
+import FaqItem from "@/components/ui/FaqItem";
 
 const HomePage = () => {
   const [pkgs, setPkgs] = useState<PaketUI[]>([]);
@@ -62,6 +63,9 @@ const HomePage = () => {
             </div>
           )}
         </div>
+      </div>
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
+        <FaqItem title="FAQ" subtitle="Pertanyaan Umum." />
       </div>
       <Footer />
     </div>
