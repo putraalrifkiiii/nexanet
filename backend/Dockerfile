@@ -38,11 +38,10 @@ COPY . .
 # Install dependencies Composer
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan config:clear
-RUN php artisan filament:assets --ansi
-RUN php artisan optimize
-
 # Atur izin folder storage dan cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
+
+# Gunakan script startup agar artisan command dijalankan saat container NYALA (bukan saat build)
+CMD ["sh", "-c", "php artisan config:clear && php artisan cache:clear && php artisan filament:assets --ansi && apache2-foreground"]
