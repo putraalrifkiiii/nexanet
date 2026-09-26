@@ -70,7 +70,7 @@ const HomePage = () => {
       </div>
       <div>
         <section className="py-20 bg-brand-blue">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col lg:flex-row  items-center justify-between gap-8">
             <h2 className="text-3xl sm:text-4xl font-black max-w-xl leading-tight font-display text-brand-white">
               Siap mengganti ke internet yang benar-benar cepat?
             </h2>
