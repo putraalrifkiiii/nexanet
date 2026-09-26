@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FOOTER_DATA } from "@/constants/footer";
+import LogoBrand from "./ui/LogoBrand";
 
 const Footer = () => {
   return (
@@ -8,25 +9,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 pb-12 border-b border-brand-border-dark">
             <div className="max-w-xs">
-              <div className="flex items-center gap-2.5 mb-4">
-                <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
-                  <rect
-                    width="22"
-                    height="22"
-                    rx="6"
-                    className="fill-brand-blue"
-                  />
-                  <path
-                    d="M5 11h12M11 5v12"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <span className="font-bold text-[15px] font-display text-brand-white">
-                  NexaNet
-                </span>
-              </div>
+              <LogoBrand textColor="text-brand-white" to="/" />
               <p className="text-sm leading-relaxed font-body text-[rgba(255,255,255,0.35)] ">
                 Fiber optik untuk seluruh Indonesia. Terpercaya sejak 2015.
               </p>

@@ -7,6 +7,10 @@ export const BUTTONVARIANTS = {
   outline:
     "border border-[rgba(255,255,255,0.1)] text-[rgba(255,255,255,0.45)] hover:bg-brand-offwhite/10",
   danger: "bg-brand-danger text-white hover:bg-brand-danger/90",
+  light:
+    "text-sm font-semibold text-brand-blue bg-brand-white hover:opacity-90 transition-opacity font-body ",
+  glass:
+    "bg-[rgba(255,255,255,0.14)] text-brand-white hover:bg-white/20 transition-colors",
 };
 
 export const BUTTONSIZES = {

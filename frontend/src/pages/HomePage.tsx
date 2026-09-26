@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
 import { fetchPaketWifi } from "@/api/paketApi";
 import FaqItem from "@/components/ui/FaqItem";
+import Button from "@/components/ui/Button";
 
 const HomePage = () => {
   const [pkgs, setPkgs] = useState<PaketUI[]>([]);
@@ -66,6 +67,24 @@ const HomePage = () => {
       </div>
       <div className="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
         <FaqItem title="FAQ" subtitle="Pertanyaan Umum." />
+      </div>
+      <div>
+        <section className="py-20 bg-brand-blue">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <h2 className="text-3xl sm:text-4xl font-black max-w-xl leading-tight font-display text-brand-white">
+              Siap mengganti ke internet yang benar-benar cepat?
+            </h2>
+            <div className="flex gap-3 shrink-0">
+              <Button to="/paket-wifi" size="lg" variant="light">
+                Lihat Paket
+              </Button>
+
+              <Button to="/daftar" size="lg" variant="glass">
+                Daftar Gratis
+              </Button>
+            </div>
+          </div>
+        </section>
       </div>
       <Footer />
     </div>

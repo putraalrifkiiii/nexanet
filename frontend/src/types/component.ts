@@ -1,6 +1,6 @@
 export interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "danger";
+  variant?: "primary" | "secondary" | "outline" | "danger" | "light" | "glass";
   size?: "sm" | "md" | "lg";
   to?: string;
   onClick?: () => void;

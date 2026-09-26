@@ -3,6 +3,7 @@ import Button from "@/components/ui/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import LogoBrand from "./ui/LogoBrand";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -18,21 +19,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-md border-b  border-brand-blue bg-white/80 ">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <rect width="22" height="22" rx="6" className="fill-brand-blue" />
-            <path
-              d="M5 11h12M11 5v12"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="font-bold text-[15px] tracking-tight font-display text-brand-dark">
-            NexaNet
-          </span>
-        </Link>
+        <LogoBrand textColor="text-brand-dark" to="/" />
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-8">
