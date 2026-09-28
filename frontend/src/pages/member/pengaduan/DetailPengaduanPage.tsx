@@ -1,5 +1,4 @@
 import MemberLayout from "@/components/MemberLayout";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function Status({ label }: { label: string }) {

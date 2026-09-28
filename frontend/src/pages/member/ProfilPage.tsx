@@ -51,7 +51,7 @@ const ProfilPage = () => {
             ["alamat", "Alamat"],
             ["telepon", "No. Telepon"],
             ["email", "Email"],
-          ].map(([key, label], i, arr) => (
+          ].map(([key, label]) => (
             <div
               key={key}
               className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-4 border-b-brand-border last:border-b-0"
