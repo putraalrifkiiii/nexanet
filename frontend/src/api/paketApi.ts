@@ -1,4 +1,5 @@
 import type { PaketWifi } from "@/types/types";
+import axios from "axios";
 
 /**
  * Mengambil daftar seluruh paket WiFi dari endpoint backend.
@@ -6,24 +7,32 @@ import type { PaketWifi } from "@/types/types";
  */
 export async function fetchPaketWifi(): Promise<PaketWifi[]> {
   try {
-    const API_URL = "https://nexanet-backend.onrender.com/api/paket-wifi";
+    const API_URL = "http://127.0.0.1:8000/api/paket-wifi";
 
-    const response = await fetch(API_URL, {
+    const response = await axios(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
 
-    if (!response.ok) {
-      throw new Error(`Gagal mengambil data: ${response.statusText}`);
-    }
-
-    const result = await response.json();
+    const result = response.data;
 
     return result.data || result;
   } catch (error) {
     console.error("Error saat fetching paket WiFi:", error);
     throw error;
   }
+}
+
+export async function fetchPaketWifiBySlug(slug: string): Promise<PaketWifi> {
+  const paketWifi = await fetchPaketWifi();
+  const paket = paketWifi.find((item) => item.slug === slug);
+
+  if (!paket) {
+    throw new Error("Paket WiFi tidak ditemukan");
+  }
+
+  return paket;
 }

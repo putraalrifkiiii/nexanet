@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
 import { fetchPaketWifi } from "@/api/paketApi";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
+import ComparisonTable from "@/components/ui/ComparisonTable";
 
 const PaketWifiPage = () => {
   const [pkgs, setPkgs] = useState<PaketUI[]>([]);
@@ -29,7 +30,7 @@ const PaketWifiPage = () => {
     <>
       <Navbar />
       <div className="bg-white min-h-screen">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-24 sm:pb-5">
           <div className="uppercase tracking-widest mb-4 font-mono text-brand-muted text-[11px]">
             Paket Internet
           </div>
@@ -60,6 +61,8 @@ const PaketWifiPage = () => {
           )}
         </div>
       </div>
+
+      <ComparisonTable />
       <Footer />
     </>
   );

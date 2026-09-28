@@ -1,4 +1,5 @@
 import { type PaketUI } from "@/constants/paketMapper";
+import { useNavigate } from "react-router-dom";
 
 const idr = (value: number) =>
   new Intl.NumberFormat("id-ID", {
@@ -14,6 +15,7 @@ interface PaketCard1Props {
 
 const PaketCard = ({ pkg, variant = "default" }: PaketCard1Props) => {
   const isCompact = variant === "compact";
+  const navigate = useNavigate();
 
   return (
     <div
@@ -102,6 +104,7 @@ const PaketCard = ({ pkg, variant = "default" }: PaketCard1Props) => {
       )}
       <button
         type="button"
+        onClick={() => navigate(`/paket-wifi/${pkg.slug}`)}
         className={`w-full py-3 text-sm font-semibold cursor-pointer hover:opacity-85 transition-opacity font-display text-brand-white rounded-[10px] ${pkg.top ? "bg-brand-blue" : "bg-brand-dark"}`}
       >
         Pilih Paket Ini
