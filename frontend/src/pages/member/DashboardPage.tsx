@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import MemberLayout from "@/components/MemberLayout";
+import { useAuth } from "@/context/AuthContext";
 
 function Status({ label }: { label: string }) {
   return (
@@ -11,6 +12,7 @@ function Status({ label }: { label: string }) {
 }
 
 const DashboardPage = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -22,7 +24,7 @@ const DashboardPage = () => {
               Senin, 7 September 2025
             </div>
             <h1 className="font-display text-brand-dark text-2xl font-black">
-              Selamat datang, Budi.
+              Selamat datang, {user?.nama ?? "Pengguna"}.
             </h1>
           </div>
           <Status label="Aktif" />

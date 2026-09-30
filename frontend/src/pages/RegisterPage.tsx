@@ -46,18 +46,30 @@ const RegisterPage = () => {
         </div>
       ) : (
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             const errs = validate();
             if (Object.keys(errs).length > 0) {
               setErrors(errs);
               return;
             }
-            setDone(true);
-            setTimeout(() => {
-              register();
-              navigate("/dashboard");
-            }, 1200);
+            try {
+              await register({
+                nama: form.nama,
+                email: form.email,
+                password: form.password,
+                alamat: form.alamat,
+                no_telepon: form.telepon,
+              });
+
+              setDone(true);
+
+              setTimeout(() => {
+                navigate("/dashboard");
+              }, 1200);
+            } catch (error) {
+              console.error(error);
+            }
           }}
           className="space-y-4"
         >
@@ -86,7 +98,7 @@ const RegisterPage = () => {
           ))}
           <button
             type="submit"
-            className="w-full py-3.5 font-semibold text-sm hover:opacity-90 transition-opacity font-display bg-brand-dark text-brand-white rounded-[10px]"
+            className="w-full py-3.5 font-semibold text-sm hover:opacity-90 transition-opacity font-display bg-brand-dark text-brand-white rounded-[10px] cursor-pointer"
           >
             Buat Akun
           </button>

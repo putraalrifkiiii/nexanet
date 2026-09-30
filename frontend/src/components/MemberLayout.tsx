@@ -1,3 +1,4 @@
+import { useAuth } from "@/context/AuthContext";
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 
@@ -12,6 +13,7 @@ function MemberLayout({ children }: { children: React.ReactNode }) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen flex bg-brand-offwhite">
@@ -47,7 +49,7 @@ function MemberLayout({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="p-4 border-t border-brand-border">
           <div className="text-xs font-semibold mb-0.5 font-body text-brand-dark">
-            Budi Santoso
+            {user?.nama ?? "Pengguna"}
           </div>
           <div className="font-mono text-brand-muted text-[10px]">
             NXN-2025-08741

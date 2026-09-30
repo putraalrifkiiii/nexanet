@@ -8,6 +8,19 @@ export interface Pengguna {
   langganan: Langganan[];
 }
 
+export interface RegisterData {
+  nama: string;
+  alamat: string;
+  no_telepon: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
 export interface Member {
   email: string;
   password: string;

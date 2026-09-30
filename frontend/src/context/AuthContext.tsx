@@ -1,10 +1,12 @@
+import type { LoginData, RegisterData, Pengguna } from "@/types/types";
 import { createContext, useContext, useState } from "react";
 
 interface AuthContextType {
   loggedIn: boolean;
-  register: () => void;
-  login: () => void;
+  register: (data: RegisterData) => Promise<void>;
+  login: (data: LoginData) => Promise<void>;
   logout: () => void;
+  user: Pengguna | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -14,14 +16,53 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
 
-  const login = () => {
+  const [user, setUser] = useState<Pengguna | null>(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
+  const login = async (data: LoginData) => {
+    const response = await fetch("http://127.0.0.1:8000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Login gagal");
+    }
+
+    localStorage.setItem("token", result.token);
+    localStorage.setItem("user", JSON.stringify(result.data));
+
     localStorage.setItem("isLoggedIn", "true");
     setLoggedIn(true);
+    setUser(result.data);
   };
 
-  const register = () => {
+  const register = async (data: RegisterData) => {
+    const response = await fetch("http://127.0.0.1:8000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Registrasi gagal");
+    }
+
     localStorage.setItem("isLoggedIn", "true");
     setLoggedIn(true);
+    localStorage.setItem("user", JSON.stringify(result.data));
+    setUser(result.data);
   };
 
   const logout = () => {
@@ -30,7 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loggedIn, login, logout, register }}>
+    <AuthContext.Provider value={{ loggedIn, user, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

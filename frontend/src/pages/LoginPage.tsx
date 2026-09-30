@@ -15,14 +15,21 @@ const LoginPage = () => {
     <div>
       <AuthShell title="Login" sub="Masuk ke akun Anda">
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             if (!email || !pass) {
               setErr("Email dan password wajib diisi.");
               return;
             }
-            login();
-            navigate("/dashboard");
+            try {
+              await login({ email: email, password: pass });
+              setTimeout(() => {
+                navigate("/dashboard");
+              }, 1200);
+            } catch (error) {
+              console.error(error);
+              setErr("Email atau password salah.");
+            }
           }}
           className="space-y-4"
         >
@@ -55,7 +62,7 @@ const LoginPage = () => {
           />
           <button
             type="submit"
-            className="w-full py-3.5 font-semibold text-sm hover:opacity-90 transition-opacity mt-2 font-display bg-brand-dark text-brand-white rounded-[10px]"
+            className="w-full py-3.5 font-semibold text-sm hover:opacity-90 transition-opacity mt-2 font-display bg-brand-dark text-brand-white rounded-[10px] cursor-pointer"
           >
             Masuk
           </button>
