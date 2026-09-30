@@ -16,10 +16,10 @@ class PenggunaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nama' => $this->pengguna?->nama,
-            'alamat' => $this->pengguna?->alamat,
-            'no_telepon' => $this->pengguna?->no_telepon,
-            'email' => $this->pengguna?->email,
+            'nama' => $this->nama,
+            'alamat' => $this->alamat,
+            'no_telepon' => $this->no_telepon,
+            'email' => $this->email,
         ];
 
     }

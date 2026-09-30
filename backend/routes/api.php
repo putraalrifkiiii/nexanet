@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\LanggananController;
 use App\Http\Controllers\Api\PaketWifiController;
 use App\Http\Controllers\Api\PembayaranController;
 use App\Http\Controllers\Api\PengaduanGangguanController;
 use App\Http\Controllers\Api\PenggunaController;
 use App\Http\Controllers\Api\TeknisiController;
+use App\Http\Resources\PenggunaResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +41,6 @@ Route::apiResource('pengaduan', PengaduanGangguanController::class)
         ], 404);
     });
 
-Route::apiResource('pengguna', PenggunaController::class);
 Route::apiResource('pengguna', PenggunaController::class)
     ->missing(function () {
         return response()->json([
@@ -48,3 +49,11 @@ Route::apiResource('pengguna', PenggunaController::class)
             'data' => null,
         ], 404);
     });
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->get('/dashboard', function (Request $request) {
+    return response()->json([
+        'data' => new PenggunaResource($request->user()),
+    ]);
+});
