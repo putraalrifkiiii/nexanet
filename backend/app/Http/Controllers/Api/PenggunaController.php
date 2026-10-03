@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PenggunaResource;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PenggunaController extends Controller
 {
@@ -49,7 +50,36 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pengguna = Pengguna::find($id);
+
+        if (! $pengguna) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pengguna tidak ditemukan',
+            ], 404);
+        }
+
+        $validated = $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string'],
+            'no_telepon' => ['required', 'string', 'max:15'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('pengguna', 'email')->ignore($pengguna->id),
+            ],
+        ]);
+
+        $pengguna->update($validated);
+
+        $pengguna->load('langganan');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Profil berhasil diperbarui',
+            'data' => new PenggunaResource($pengguna),
+        ], 200);
+
     }
 
     /**
