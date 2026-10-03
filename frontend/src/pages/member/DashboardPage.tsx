@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import MemberLayout from "@/components/MemberLayout";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 function Status({ label }: { label: string }) {
   return (
@@ -12,12 +13,16 @@ function Status({ label }: { label: string }) {
 }
 
 const DashboardPage = () => {
-  const { user } = useAuth();
+  const { user, getCurrentUser } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getCurrentUser();
+  }, [getCurrentUser]);
 
   return (
     <MemberLayout>
-      <div className="max-w-4xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-0 py-10">
         <div className="flex items-end justify-between mb-10">
           <div>
             <div className="font-mono text-brand-muted text-[10px] uppercase tracking-widest mb-2">
@@ -60,7 +65,7 @@ const DashboardPage = () => {
             {(
               [
                 ["Bayar Tagihan", "pembayaran"],
-                ["Lihat Langganan", "langganan-saya"],
+                ["Lihat Langganan", "langganan"],
                 ["Laporkan Masalah", "pengaduan"],
                 ["Edit Profil", "profil"],
               ] as [string, string][]

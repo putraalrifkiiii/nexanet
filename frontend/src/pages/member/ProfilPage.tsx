@@ -1,15 +1,68 @@
 import { useState } from "react";
 import MemberLayout from "@/components/MemberLayout";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 const ProfilPage = () => {
   const [editing, setEditing] = useState(false);
+
+  const [saved, setSaved] = useState(false);
+
+  const { user, getCurrentUser, updateProfile } = useAuth();
+  useEffect(() => {
+    getCurrentUser();
+  }, [getCurrentUser]);
+
   const [form, setForm] = useState({
     nama: "Budi Santoso",
     alamat: "Jl. Merdeka No. 10, Jakarta Pusat",
-    telepon: "081234567890",
+    no_telepon: "081234567890",
     email: "budi.santoso@email.com",
   });
-  const [saved, setSaved] = useState(false);
+
+  const handleUpdateProfile = async () => {
+    try {
+      await updateProfile(form);
+      setEditing(false);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  const handleStartEdit = () => {
+    if (!user) return;
+
+    setForm({
+      nama: user.nama,
+      alamat: user.alamat,
+      no_telepon: user.no_telepon,
+      email: user.email,
+    });
+
+    setEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    if (user) {
+      setForm({
+        nama: user.nama,
+        alamat: user.alamat,
+        no_telepon: user.no_telepon,
+        email: user.email,
+      });
+    }
+
+    setEditing(false);
+  };
+
+  const profileFields = [
+    ["nama", "Nama Lengkap"],
+    ["alamat", "Alamat"],
+    ["no_telepon", "No. Telepon"],
+    ["email", "Email"],
+  ] as const;
 
   return (
     <MemberLayout>
@@ -34,7 +87,7 @@ const ProfilPage = () => {
             </div>
             <div>
               <div className="font-bold text-base font-display text-brand-dark">
-                {form.nama}
+                {user?.nama ?? "Pengguna"}
               </div>
               <div className="font-mono text-brand-muted text-[11px]">
                 NXN-2025-08741
@@ -46,12 +99,7 @@ const ProfilPage = () => {
               Profil berhasil disimpan.
             </div>
           )}
-          {[
-            ["nama", "Nama Lengkap"],
-            ["alamat", "Alamat"],
-            ["telepon", "No. Telepon"],
-            ["email", "Email"],
-          ].map(([key, label]) => (
+          {profileFields.map(([key, label]) => (
             <div
               key={key}
               className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-4 border-b-brand-border last:border-b-0"
@@ -61,13 +109,13 @@ const ProfilPage = () => {
               </span>
               {editing ? (
                 <input
-                  value={form[key as keyof typeof form]}
+                  value={form[key]}
                   onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                   className="flex-1 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-body border border-brand-border rounded-lg text-brand-dark"
                 />
               ) : (
                 <span className="text-sm font-body text-brand-dark">
-                  {form[key as keyof typeof form]}
+                  {user?.[key] ?? "Tidak tersedia"}
                 </span>
               )}
             </div>
@@ -76,17 +124,13 @@ const ProfilPage = () => {
             {editing ? (
               <>
                 <button
-                  onClick={() => {
-                    setEditing(false);
-                    setSaved(true);
-                    setTimeout(() => setSaved(false), 2000);
-                  }}
+                  onClick={handleUpdateProfile}
                   className="px-5 py-2.5 text-xs font-semibold hover:opacity-90 transition-opacity font-body bg-brand-dark text-brand-white rounded-lg"
                 >
                   Simpan Perubahan
                 </button>
                 <button
-                  onClick={() => setEditing(false)}
+                  onClick={handleCancelEdit}
                   className="px-5 py-2.5 text-xs font-medium hover:bg-gray-50 transition-colors font-body border border-brand-border text-brand-dark rounded-lg"
                 >
                   Batal
@@ -94,7 +138,7 @@ const ProfilPage = () => {
               </>
             ) : (
               <button
-                onClick={() => setEditing(true)}
+                onClick={handleStartEdit}
                 className="px-5 py-2.5 text-xs font-medium hover:bg-gray-50 transition-colors font-body border border-brand-border text-brand-dark rounded-lg"
               >
                 Edit Profil

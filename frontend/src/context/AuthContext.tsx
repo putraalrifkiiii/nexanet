@@ -7,6 +7,13 @@ interface AuthContextType {
   login: (data: LoginData) => Promise<void>;
   logout: () => void;
   user: Pengguna | null;
+  getCurrentUser: () => Promise<void>;
+  updateProfile: (data: {
+    nama: string;
+    alamat: string;
+    no_telepon: string;
+    email: string;
+  }) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -70,8 +77,75 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setLoggedIn(false);
   };
 
+  const getCurrentUser = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    const response = await fetch("http://127.0.0.1:8000/api/dashboard", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Gagal mengambil data user");
+    }
+
+    localStorage.setItem("user", JSON.stringify(result.data));
+    setUser(result.data);
+  };
+
+  const updateProfile = async (data: {
+    nama: string;
+    alamat: string;
+    no_telepon: string;
+    email: string;
+  }) => {
+    if (!user) {
+      throw new Error("Data pengguna tidak ditemukan");
+    }
+
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/pengguna/${user.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      },
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Gagal memperbarui profil");
+    }
+
+    localStorage.setItem("user", JSON.stringify(result.data));
+    setUser(result.data);
+  };
+
   return (
-    <AuthContext.Provider value={{ loggedIn, user, login, logout, register }}>
+    <AuthContext.Provider
+      value={{
+        loggedIn,
+        user,
+        login,
+        logout,
+        register,
+        getCurrentUser,
+        updateProfile,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

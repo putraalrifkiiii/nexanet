@@ -3,7 +3,7 @@ export interface Pengguna {
   nama: string;
   alamat: string;
   no_telepon: string;
-  //   email: string;
+  email: string;
   //   password: string;
   langganan: Langganan[];
 }

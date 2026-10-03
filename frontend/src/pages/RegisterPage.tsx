@@ -22,7 +22,11 @@ const RegisterPage = () => {
     const e: Record<string, string> = {};
     if (!form.nama) e.nama = "Wajib diisi";
     if (!form.alamat) e.alamat = "Wajib diisi";
-    if (!form.telepon) e.telepon = "Wajib diisi";
+    if (!form.telepon) {
+      e.telepon = "Wajib diisi";
+    } else if (!/^\d+$/.test(form.telepon)) {
+      e.telepon = "Nomor telepon harus angka";
+    }
     if (!form.email) e.email = "Wajib diisi";
     if (!form.password || form.password.length < 8)
       e.password = "Minimal 8 karakter";
