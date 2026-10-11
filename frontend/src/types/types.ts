@@ -60,6 +60,7 @@ export interface PaketWifi {
   slug: string;
   kecepatan_mbps: number;
   harga: number;
+  biaya_pemasangan: number;
   deskripsi_paket: string;
 }
 
@@ -80,10 +81,10 @@ export interface Pembayaran {
   nomor_pembayaran: string;
   langganan: Langganan;
   tanggal_bayar: string | null;
-  jumlah_bayar: number;
   metode_pembayaran: string;
   bukti_pembayaran: string | null;
   status_pembayaran: string;
+  total_pembayaran: number;
 }
 
 export interface PengaduanGangguan {

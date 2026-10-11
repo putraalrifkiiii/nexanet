@@ -16,17 +16,17 @@ type ApiPembayaran = Partial<Pembayaran> & {
 };
 
 function normalizePembayaran(item: ApiPembayaran): Pembayaran {
-  const langganan = item.langganan ?? {};
-  const paketWifi = langganan.paket_wifi ?? {};
+  const langganan = item.langganan;
+  const paketWifi = langganan?.paket_wifi;
 
   return {
     ...item,
     langganan: {
       ...langganan,
-      id: langganan.id ?? langganan.id_langganan,
+      id: langganan?.id ?? langganan?.id_langganan,
       paket_wifi: {
         ...paketWifi,
-        id: paketWifi.id ?? paketWifi.id_paket,
+        id: paketWifi?.id ?? paketWifi?.id_paket,
       },
     },
   } as Pembayaran;

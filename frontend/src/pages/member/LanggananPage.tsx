@@ -13,8 +13,7 @@ function Status({ label }: { label: string }) {
 }
 
 const LanggananPage = () => {
-  const { user, dashboard, getCurrentUser, langganan, getLangganan } =
-    useAuth();
+  const { langganan, getLangganan } = useAuth();
   useEffect(() => {
     getLangganan();
   });
