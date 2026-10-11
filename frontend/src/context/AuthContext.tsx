@@ -1,4 +1,10 @@
-import type { LoginData, RegisterData, Pengguna } from "@/types/types";
+import type {
+  LoginData,
+  RegisterData,
+  Pengguna,
+  DashboardData,
+  LanggananData,
+} from "@/types/types";
 import { createContext, useContext, useState } from "react";
 
 interface AuthContextType {
@@ -7,7 +13,10 @@ interface AuthContextType {
   login: (data: LoginData) => Promise<void>;
   logout: () => void;
   user: Pengguna | null;
+  dashboard: DashboardData | null;
+  langganan: LanggananData[];
   getCurrentUser: () => Promise<void>;
+  getLangganan: () => Promise<void>;
   updateProfile: (data: {
     nama: string;
     alamat: string;
@@ -22,6 +31,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(() => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
+
+  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+
+  const [langganan, setLangganan] = useState<LanggananData[]>([]);
 
   const [user, setUser] = useState<Pengguna | null>(() => {
     const savedUser = localStorage.getItem("user");
@@ -99,6 +112,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     localStorage.setItem("user", JSON.stringify(result.data));
     setUser(result.data);
+
+    const dashboardData = result.data;
+
+    localStorage.setItem("user", JSON.stringify(dashboardData.pengguna));
+
+    setUser(dashboardData.pengguna);
+    setDashboard(dashboardData);
   };
 
   const updateProfile = async (data: {
@@ -134,6 +154,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(result.data);
   };
 
+  const getLangganan = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    const response = await fetch("http://127.0.0.1:8000/api/me/langganan", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Gagal mengambil data langganan");
+    }
+
+    setLangganan(result.data.langganan ?? []);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -142,8 +185,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         login,
         logout,
         register,
+        dashboard,
         getCurrentUser,
         updateProfile,
+        langganan,
+        getLangganan,
       }}
     >
       {children}

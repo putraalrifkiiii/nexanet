@@ -1,5 +1,5 @@
 import type { PaketWifi } from "@/types/types";
-import axios from "axios";
+import apiClient, { isAxiosError } from "@/api/apiService";
 
 /**
  * Mengambil daftar seluruh paket WiFi dari endpoint backend.
@@ -7,21 +7,22 @@ import axios from "axios";
  */
 export async function fetchPaketWifi(): Promise<PaketWifi[]> {
   try {
-    const API_URL = "http://127.0.0.1:8000/api/paket-wifi";
+    const response = await apiClient.get("/paket-wifi");
 
-    const response = await axios(API_URL, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-
-    const result = response.data;
+    const result = response.data.data;
 
     return result.data || result;
   } catch (error) {
-    console.error("Error saat fetching paket WiFi:", error);
+    if (isAxiosError(error)) {
+      console.error(
+        "Error saat fetching paket WiFi:",
+        (error.response?.data as { message?: string } | undefined)?.message ??
+          "Unknown error",
+      );
+    } else {
+      console.error("Error tidak dikenal:", error);
+    }
+
     throw error;
   }
 }

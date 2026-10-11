@@ -17,7 +17,7 @@ function MemberLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex bg-brand-offwhite">
-      <aside className="hidden md:flex flex-col shrink-0 bg-brand-white border-r border-brand-border w-55">
+      <aside className="hidden fixed top-0 left-0 h-screen md:flex flex-col shrink-0 bg-brand-white border-r border-brand-border w-55">
         <div className="px-6 py-4 flex items-center gap-2.5 border-b border-brand-border">
           <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
             <rect width="22" height="22" rx="6" className="fill-brand-blue" />

@@ -2,7 +2,7 @@ import PaketCard from "@/components/ui/PaketCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
-import { fetchPaketWifi } from "@/api/paketApi";
+import { fetchPaketWifi } from "@/api/paketWifiService";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
 import ComparisonTable from "@/components/ui/ComparisonTable";
 

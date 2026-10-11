@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPaketWifi } from "@/api/paketApi";
+import { fetchPaketWifi } from "@/api/paketWifiService";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
 
 const idr = (value: number) =>

@@ -21,6 +21,34 @@ export interface LoginData {
   password: string;
 }
 
+export interface DashboardData {
+  pengguna: Pengguna;
+  langganan: Langganan | null;
+  pembayaran: Pembayaran | null;
+  teknisi: Teknisi | null;
+}
+
+export interface LanggananData {
+  id: number;
+  tanggal_mulai: string | null;
+  tanggal_berakhir: string | null;
+  status_langganan: string;
+  biaya_pemasangan: number | null;
+  paket_wifi: PaketWifi | null;
+  teknisi: TeknisiLangganan | null;
+  pembayaran: PembayaranLangganan | null;
+}
+
+export interface PembayaranLangganan {
+  id_pembayaran: number;
+  nomor_pembayaran: string;
+  jumlah_pembayaran: number;
+  metode_pembayaran: string;
+  bukti_pembayaran: string | null;
+  status_pembayaran: string;
+  tanggal_pembayaran: string | null;
+}
+
 export interface Member {
   email: string;
   password: string;
@@ -32,7 +60,6 @@ export interface PaketWifi {
   slug: string;
   kecepatan_mbps: number;
   harga: number;
-  biaya_pemasangan: number;
   deskripsi_paket: string;
 }
 
@@ -52,10 +79,10 @@ export interface Pembayaran {
   pengguna: Pengguna;
   nomor_pembayaran: string;
   langganan: Langganan;
-  tanggal_bayar: string;
-  total_pembayaran: number;
+  tanggal_bayar: string | null;
+  jumlah_bayar: number;
   metode_pembayaran: string;
-  bukti_pembayaran: string;
+  bukti_pembayaran: string | null;
   status_pembayaran: string;
 }
 
@@ -69,6 +96,12 @@ export interface PengaduanGangguan {
   status_penanganan: string;
 }
 
+export interface TeknisiLangganan {
+  id_teknisi: number;
+  nama_teknisi: string;
+  no_telepon: string;
+  status_ketersediaan: string;
+}
 export interface Teknisi {
   id: number;
   nama_teknisi: string;

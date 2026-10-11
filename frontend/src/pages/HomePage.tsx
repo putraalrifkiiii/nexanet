@@ -5,7 +5,7 @@ import FeatureSection from "@/components/sections/FeatureSection";
 import { PaketCard } from "@/components/paket-wifi";
 import { useState, useEffect } from "react";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
-import { fetchPaketWifi } from "@/api/paketApi";
+import { fetchPaketWifi } from "@/api/paketWifiService";
 import FaqItem from "@/components/ui/FaqItem";
 import Button from "@/components/ui/Button";
 

@@ -13,7 +13,7 @@ function Status({ label }: { label: string }) {
 }
 
 const DashboardPage = () => {
-  const { user, getCurrentUser } = useAuth();
+  const { user, dashboard, getCurrentUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,10 +37,27 @@ const DashboardPage = () => {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
           {[
-            ["Paket Aktif", "NexaNet Home", "20 Mbps"],
-            ["Tagihan Aktif", "Rp220.000", "Jatuh tempo 10 Okt"],
-            ["Status Bayar", "Menunggu", "Oktober 2025"],
-            ["Aktif Hingga", "31 Okt 2025", "30 hari lagi"],
+            [
+              "Paket Aktif",
+              dashboard?.langganan?.paket_wifi?.nama_paket ??
+                "Belum Berlangganan",
+              `${dashboard?.langganan?.paket_wifi?.kecepatan_mbps ?? 0} Mbps`,
+            ],
+            [
+              "Tagihan Aktif",
+              dashboard?.pembayaran?.total_pembayaran ?? "0",
+              ` Jatuh tempo ${dashboard?.langganan?.tanggal_berakhir ?? "-"}`,
+            ],
+            [
+              "Status Bayar",
+              dashboard?.pembayaran?.status_pembayaran ?? "Belum Bayar",
+              `Jatuh tempo ${dashboard?.langganan?.tanggal_berakhir ?? "-"}`,
+            ],
+            [
+              "Aktif Hingga",
+              dashboard?.langganan?.tanggal_berakhir ?? "-",
+              "30 hari lagi",
+            ],
           ].map(([label, value, sub]) => (
             <div
               key={label as string}
@@ -87,9 +104,13 @@ const DashboardPage = () => {
           </div>
           {[
             ["No. Pelanggan", "NXN-2025-08741", true],
-            ["Tanggal Mulai", "1 Oktober 2025", false],
-            ["Alamat Pasang", "Jl. Merdeka No. 10, Jakarta", false],
-            ["Nama Teknisi", "Agus Suprianto", false],
+            ["Tanggal Mulai", dashboard?.langganan?.tanggal_mulai, false],
+            ["Alamat Pasang", dashboard?.pengguna?.alamat, false],
+            [
+              "Nama Teknisi",
+              dashboard?.teknisi?.nama_teknisi ?? "Tidak tersedia",
+              false,
+            ],
           ].map(([k, v, mono]) => (
             <div
               key={k as string}

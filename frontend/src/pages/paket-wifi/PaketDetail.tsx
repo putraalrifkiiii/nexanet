@@ -1,5 +1,5 @@
 import { formatRupiah } from "@/utils/formatters";
-import { fetchPaketWifiBySlug } from "@/api/paketApi";
+import { fetchPaketWifiBySlug } from "@/api/paketWifiService";
 import { mapPaketToUI, type PaketUI } from "@/constants/paketMapper";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -33,11 +33,19 @@ function PaketDetail() {
   }, [slug]);
 
   if (isLoading) {
-    return <p className="p-8 text-sm font-body text-brand-muted">Memuat detail paket...</p>;
+    return (
+      <p className="p-8 text-sm font-body text-brand-muted">
+        Memuat detail paket...
+      </p>
+    );
   }
 
   if (error || !pkg) {
-    return <p className="p-8 text-sm font-body text-brand-danger">{error ?? "Paket WiFi tidak ditemukan."}</p>;
+    return (
+      <p className="p-8 text-sm font-body text-brand-danger">
+        {error ?? "Paket WiFi tidak ditemukan."}
+      </p>
+    );
   }
 
   return (
