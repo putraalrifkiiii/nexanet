@@ -15,13 +15,14 @@ class PembayaranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $pembayaran = Pembayaran::with([
             'pengguna',
             'langganan.paketWifi',
             'langganan.teknisi',
         ])
+            ->where('id_pengguna', $request->user()->id)
             ->latest()
             ->get();
 
@@ -47,7 +48,7 @@ class PembayaranController extends Controller
         try {
             $validatedData = $request->validated();
 
-            $validatedData['id_pengguna'] = 2;
+            $validatedData['id_pengguna'] = $request->user()->id;
             $validatedData['nomor_pembayaran'] = Pembayaran::paymentNumber();
 
             $langganan = Langganan::find($validatedData['id_langganan']);

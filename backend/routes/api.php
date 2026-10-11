@@ -29,8 +29,16 @@ Route::get('/paket-wifi/{PaketWifi:slug}', [PaketWifiController::class, 'show'])
 
 Route::apiResource('langganan', LanggananController::class);
 
-Route::get('/pembayaran/cek-status', [PembayaranController::class, 'cekStatusLangganan']);
-Route::apiResource('pembayaran', PembayaranController::class);
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/pembayaran/cek-status', [
+        PembayaranController::class,
+        'cekStatusLangganan',
+    ]);
+
+    Route::apiResource('pembayaran', PembayaranController::class);
+
+});
 
 Route::apiResource('pengaduan', PengaduanGangguanController::class)
     ->missing(function () {
@@ -52,8 +60,28 @@ Route::apiResource('pengguna', PenggunaController::class)
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
 Route::middleware('auth:sanctum')->get('/dashboard', function (Request $request) {
+
+    $pengguna = $request->user();
+
+    $langganan = $pengguna->langganan()
+        ->where('status_langganan', 'aktif')
+        ->with('paketWifi', 'teknisi')
+        ->first();
+
+    $pembayaran = $pengguna->pembayaran()
+        ->where('id_langganan', $langganan?->id)
+        ->latest('tanggal_bayar')
+        ->first();
+
     return response()->json([
-        'data' => new PenggunaResource($request->user()),
+        'data' => [
+            'pengguna' => new PenggunaResource($pengguna),
+            'langganan' => $langganan,
+            'pembayaran' => $pembayaran,
+        ],
     ]);
 });
+
+Route::get('/me/langganan', [LanggananController::class, 'getLanggananByUser'])->middleware('auth:sanctum');

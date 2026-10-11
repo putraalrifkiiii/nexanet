@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['id_pengguna', 'id_paket', 'tanggal_mulai', 'tanggal_berakhir', 'status_langganan', 'installation_cost'])]
+#[Fillable(['id_pengguna', 'id_paket', 'tanggal_mulai', 'tanggal_berakhir', 'status_langganan', 'biaya_pemasangan'])]
 class Langganan extends Model
 {
     use SoftDeletes;
 
     protected $table = 'langganan';
+
+    protected $casts = [
+        'biaya_pemasangan' => 'integer',
+    ];
 
     public function pengguna(): BelongsTo
     {

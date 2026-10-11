@@ -33,6 +33,17 @@ class LanggananApiResource extends JsonResource
                 'no_telepon' => $this->teknisi->no_telepon ?? null,
                 'status_ketersediaan' => $this->teknisi->status_ketersediaan ?? null,
             ],
+            'pembayaran' => $this->pembayaran->map(function ($pembayaran) {
+                return [
+                    'id_pembayaran' => $pembayaran->id,
+                    'nomor_pembayaran' => $pembayaran->nomor_pembayaran,
+                    'jumlah_pembayaran' => $pembayaran->total_pembayaran,
+                    'metode_pembayaran' => $pembayaran->metode_pembayaran,
+                    'status_pembayaran' => $pembayaran->status_pembayaran,
+                    'bukti_pembayaran' => $pembayaran->bukti_pembayaran,
+                    'tanggal_pembayaran' => $pembayaran->tanggal_bayar,
+                ];
+            }),
         ];
     }
 }

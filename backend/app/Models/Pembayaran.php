@@ -40,13 +40,6 @@ class Pembayaran extends Model
 
     protected static function booted()
     {
-        static::saving(function ($pembayaran) {
-            if ($pembayaran->bukti_pembayaran) {
-                $pembayaran->status_pembayaran = 'Lunas';
-            } elseif (! $pembayaran->bukti_pembayaran && $pembayaran->status_pembayaran !== 'Gagal') {
-                $pembayaran->status_pembayaran = 'Pending';
-            }
-        });
 
         static::saved(function ($pembayaran) {
             // Gunakan optional() agar aman jika relasi langganannya null

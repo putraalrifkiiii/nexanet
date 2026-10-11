@@ -15,6 +15,7 @@ use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -179,6 +180,13 @@ class PembayaranRelationManager extends RelationManager
                         'E-Wallet' => 'E-Wallet',
                     ]),
 
+                FileUpload::make('bukti_pembayaran')
+                    ->label('Bukti Pembayaran')
+                    ->disk('public')
+                    ->directory('bukti_pembayaran')
+                    ->image()
+                    ->nullable(),
+
                 Select::make('status_pembayaran')
                     ->label('Status')
                     ->required()
@@ -187,7 +195,8 @@ class PembayaranRelationManager extends RelationManager
                         'Pending' => 'Pending (Menunggu Pembayaran)',
                         'Gagal' => 'Gagal / Dibatalkan',
                     ])
-                    ->default('Lunas'),
+                    ->default('Pending'),
+
             ]);
 
     }
@@ -219,6 +228,13 @@ class PembayaranRelationManager extends RelationManager
                         TextEntry::make('total_pembayaran')
                             ->label('Total Pembayaran')
                             ->money('IDR'),
+                        TextEntry::make('bukti_pembayaran')
+                            ->label('Bukti Pembayaran')
+                            ->formatStateUsing(fn ($state) => $state ? 'Lihat Bukti Pembayaran' : 'Belum Ada Bukti')
+                            ->url(fn ($state) => $state ? asset('storage/'.$state) : null)
+                            ->openUrlInNewTab()
+                            ->color('primary')
+                            ->weight('bold'),
                         TextEntry::make('status_pembayaran')
                             ->label('Status Pembayaran')
                             ->badge()

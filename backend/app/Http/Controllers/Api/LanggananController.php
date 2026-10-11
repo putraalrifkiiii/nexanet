@@ -107,4 +107,24 @@ class LanggananController extends Controller
     {
         //
     }
+
+    public function getLanggananByUser(Request $request)
+    {
+        $pengguna = $request->user();
+
+        $langganan = Langganan::with([
+            'paketWifi',
+            'teknisi',
+            'pembayaran',
+        ])
+            ->where('id_pengguna', $pengguna->id)
+            ->get();
+
+        return response()->json([
+            'data' => [
+                'langganan' => LanggananApiResource::collection($langganan),
+            ],
+
+        ]);
+    }
 }
