@@ -20,7 +20,7 @@ class PaketWifiApiResource extends JsonResource
             'slug' => $this->slug ?? null,
             'kecepatan_mbps' => $this->kecepatan_mbps ?? null,
             'harga' => $this->harga ?? null,
-            'biaya_pemasangan' => $this->harga > 300000 ? 0 : $this->biaya_pemasangan,
+            'biaya_pemasangan' => $this->harga > 300000 ? 0 : 150000,
             'deskripsi_paket' => $this->deskripsi_paket ?? null,
 
         ];

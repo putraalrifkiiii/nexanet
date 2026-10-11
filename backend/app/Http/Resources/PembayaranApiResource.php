@@ -17,7 +17,7 @@ class PembayaranApiResource extends JsonResource
         return [
             'id' => $this->id,
             'nomor_pembayaran' => $this->nomor_pembayaran,
-            'jumlah_bayar' => $this->total_pembayaran,
+            'total_pembayaran' => $this->total_pembayaran,
             'tanggal_bayar' => $this->tanggal_bayar,
             'metode_pembayaran' => $this->metode_pembayaran,
             'bukti_pembayaran' => $this->bukti_pembayaran ? asset('storage/'.$this->bukti_pembayaran) : null,
