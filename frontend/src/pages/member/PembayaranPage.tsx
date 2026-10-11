@@ -146,7 +146,7 @@ const PembayaranPage = () => {
                   Total Pembayaran
                 </span>
                 <span className="text-3xl font-black font-display text-brand-dark">
-                  {formatRupiah(tagihanAktif.jumlah_bayar)}
+                  {formatRupiah(tagihanAktif.total_pembayaran)}
                 </span>
               </div>
               <div className="p-5 mb-6 bg-brand-offwhite rounded-xl">
@@ -155,7 +155,7 @@ const PembayaranPage = () => {
                 </div>
                 {[
                   ["Metode", tagihanAktif.metode_pembayaran],
-                  ["Nominal", formatRupiah(tagihanAktif.jumlah_bayar)],
+                  ["Nominal", formatRupiah(tagihanAktif.total_pembayaran)],
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between mb-1.5">
                     <span className="text-xs font-body text-brand-muted">
@@ -256,7 +256,7 @@ const PembayaranPage = () => {
               </div>
               <div className="flex items-center gap-6">
                 <span className="font-bold text-sm font-display text-brand-dark">
-                  {formatRupiah(p.jumlah_bayar)}
+                  {formatRupiah(p.total_pembayaran)}
                 </span>
                 <Status label={p.status_pembayaran} />
               </div>
