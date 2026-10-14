@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const login = async (data: LoginData) => {
-    const response = await fetch("http://127.0.0.1:8000/api/login", {
+    const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const register = async (data: RegisterData) => {
-    const response = await fetch("http://127.0.0.1:8000/api/register", {
+    const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    const response = await fetch("http://127.0.0.1:8000/api/dashboard", {
+    const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const response = await fetch(
-      `http://127.0.0.1:8000/api/pengguna/${user.id}`,
+      `${import.meta.env.VITE_REACT_API_URL}/pengguna/${user.id}`,
       {
         method: "PUT",
         headers: {
@@ -152,7 +152,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    const response = await fetch("http://127.0.0.1:8000/api/me/langganan", {
+    const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/me/langganan`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
