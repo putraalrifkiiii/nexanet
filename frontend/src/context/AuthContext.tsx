@@ -4,6 +4,7 @@ import type {
   Pengguna,
   DashboardData,
   LanggananData,
+  UpdateProfile,
 } from "@/types/types";
 import { createContext, useContext, useState } from "react";
 
@@ -17,12 +18,7 @@ interface AuthContextType {
   langganan: LanggananData[];
   getCurrentUser: () => Promise<void>;
   getLangganan: () => Promise<void>;
-  updateProfile: (data: {
-    nama: string;
-    alamat: string;
-    no_telepon: string;
-    email: string;
-  }) => Promise<void>;
+  updateProfile: (data: UpdateProfile) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -121,12 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setDashboard(dashboardData);
   };
 
-  const updateProfile = async (data: {
-    nama: string;
-    alamat: string;
-    no_telepon: string;
-    email: string;
-  }) => {
+  const updateProfile = async (data: UpdateProfile) => {
     if (!user) {
       throw new Error("Data pengguna tidak ditemukan");
     }

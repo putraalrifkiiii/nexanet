@@ -117,3 +117,10 @@ export interface Admin {
   password: string;
   no_telepon: string;
 }
+
+export interface UpdateProfile {
+  nama: string;
+  alamat: string;
+  no_telepon: string;
+  email: string;
+}

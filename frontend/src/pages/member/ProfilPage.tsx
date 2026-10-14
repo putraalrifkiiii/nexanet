@@ -14,10 +14,10 @@ const ProfilPage = () => {
   }, [getCurrentUser]);
 
   const [form, setForm] = useState({
-    nama: "Budi Santoso",
-    alamat: "Jl. Merdeka No. 10, Jakarta Pusat",
-    no_telepon: "081234567890",
-    email: "budi.santoso@email.com",
+    nama: "",
+    alamat: "",
+    no_telepon: "",
+    email: "",
   });
 
   const handleUpdateProfile = async () => {
@@ -66,7 +66,7 @@ const ProfilPage = () => {
 
   return (
     <MemberLayout>
-      <div className="max-w-2xl mx-auto px-6 py-10">
+      <div className="max-w-4xl mx-auto px-6 py-10">
         <div className="uppercase tracking-widest mb-3 font-mono text-brand-muted text-[10px]">
           Akun
         </div>
@@ -75,16 +75,11 @@ const ProfilPage = () => {
         </h1>
         <div className="p-6 bg-brand-white border border-brand-border rounded-[14px]">
           <div className="flex items-center gap-4 mb-8">
-            <div
-              style={{
-                borderRadius: "50%",
-              }}
-              className="w-13 h-13 rounded-full bg-brand-dark flex items-center justify-center"
-            >
-              <span className="font-black text-lg font-display text-brand-white">
-                B
-              </span>
-            </div>
+            <img
+              src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(user?.nama ?? "User")}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`}
+              alt="Foto Profil"
+              className="w-13 h-13 rounded-full bg-brand-dark object-cover"
+            />
             <div>
               <div className="font-bold text-base font-display text-brand-dark">
                 {user?.nama ?? "Pengguna"}
@@ -102,7 +97,7 @@ const ProfilPage = () => {
           {profileFields.map(([key, label]) => (
             <div
               key={key}
-              className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-4 border-b-brand-border last:border-b-0"
+              className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-4 ${!editing ? "border-b border-brand-border" : ""}`}
             >
               <span className="uppercase tracking-widest shrink-0 w-32 font-mono text-brand-muted text-[10px]">
                 {label}
@@ -125,13 +120,13 @@ const ProfilPage = () => {
               <>
                 <button
                   onClick={handleUpdateProfile}
-                  className="px-5 py-2.5 text-xs font-semibold hover:opacity-90 transition-opacity font-body bg-brand-dark text-brand-white rounded-lg"
+                  className="px-5 py-2.5 text-xs font-semibold hover:opacity-90 transition-opacity font-body bg-brand-dark text-brand-white rounded-lg cursor-pointer"
                 >
                   Simpan Perubahan
                 </button>
                 <button
                   onClick={handleCancelEdit}
-                  className="px-5 py-2.5 text-xs font-medium hover:bg-gray-50 transition-colors font-body border border-brand-border text-brand-dark rounded-lg"
+                  className="px-5 py-2.5 text-xs font-medium hover:bg-gray-50 transition-colors cursor-pointer font-body border border-brand-border text-brand-dark rounded-lg"
                 >
                   Batal
                 </button>
@@ -139,7 +134,7 @@ const ProfilPage = () => {
             ) : (
               <button
                 onClick={handleStartEdit}
-                className="px-5 py-2.5 text-xs font-medium hover:bg-gray-50 transition-colors font-body border border-brand-border text-brand-dark rounded-lg"
+                className="px-5 py-2.5 text-xs font-medium hover:bg-gray-50 transition-colors cursor-pointer font-body border border-brand-border text-brand-dark rounded-lg"
               >
                 Edit Profil
               </button>

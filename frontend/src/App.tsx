@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "@/context/AuthContext";
+import ProtectedRoute from "@/components/routes/ProtectedRoute";
+import GuestRoute from "@/components/routes/GuestRoute";
+
 import HomePage from "@/pages/HomePage";
 import BantuanPage from "@/pages/BantuanPage";
 import PaketWifiPage from "@/pages/paket-wifi/PaketWifiPage";
@@ -24,14 +27,14 @@ function App() {
           <Route path="/paket-wifi" element={<PaketWifiPage />} />
           <Route path="/paket-wifi/:slug" element={<PaketDetail />} />
           <Route path="/tentang-kami" element={<TentangKamiPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/daftar" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/langganan" element={<LanggananPage />} />
-          <Route path="/pembayaran" element={<PembayaranPage />} />
-          <Route path="/pengaduan" element={<PengaduanPage />} />
-          <Route path="/pengaduan-detail" element={<DetailPengaduanPage />} />
-          <Route path="/profil" element={<ProfilPage />} />
+          <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
+          <Route path="/daftar" element={<GuestRoute><RegisterPage /></GuestRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/langganan" element={<ProtectedRoute><LanggananPage /></ProtectedRoute>} />
+          <Route path="/pembayaran" element={<ProtectedRoute><PembayaranPage /></ProtectedRoute>} />
+          <Route path="/pengaduan" element={<ProtectedRoute><PengaduanPage /></ProtectedRoute>} />
+          <Route path="/pengaduan-detail" element={<ProtectedRoute><DetailPengaduanPage /></ProtectedRoute>} />
+          <Route path="/profil" element={<ProtectedRoute><ProfilPage /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
