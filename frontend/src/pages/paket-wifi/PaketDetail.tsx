@@ -29,12 +29,12 @@ function PaketDetail() {
       }
     }
 
-    void loadPaketDetail();
+    loadPaketDetail();
   }, [slug]);
 
   if (isLoading) {
     return (
-      <p className="p-8 text-sm font-body text-brand-muted">
+      <p className="min-h-screen text-sm font-body text-brand-muted justify-center items-center flex">
         Memuat detail paket...
       </p>
     );
@@ -50,26 +50,26 @@ function PaketDetail() {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 py-14">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-14">
         <button
           onClick={() => navigate("/paket-wifi")}
-          className="flex items-center gap-2 mb-12 hover:text-gray-700 transition-colors font-mono text-brand-muted text-xs"
+          className="flex items-center mb-12 hover:text-gray-700 transition-colors font-mono text-brand-muted text-xs cursor-pointer"
         >
           ← Semua paket
         </button>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 space-y-10">
             <div>
-              <div className="uppercase tracking-widest mb-3 font-mono text-brand-muted *:text-[11px]">
+              <div className="uppercase tracking-widest mb-3 font-mono text-brand-muted text-[11px]">
                 NexaNet {pkg.nama_paket}
               </div>
-              <div className="text-8xl font-black leading-none mb-1 font-display text-brand-dark">
+              <div className="text-7xl font-black leading-none mb-1 font-display text-brand-dark">
                 {pkg.kecepatan_mbps}
               </div>
               <div className="text-lg mb-6 font-body text-brand-muted">
                 Mbps
               </div>
-              <p className="text-sm leading-relaxed max-w-md font-body text-brand-muted">
+              <p className="text-sm leading-relaxed max-w-lg font-body text-brand-muted">
                 {pkg.deskripsi_paket}
               </p>
             </div>
@@ -89,7 +89,7 @@ function PaketDetail() {
                 <div
                   style={{
                     color: pkg.biaya_pemasangan === 0 ? "#059669" : undefined,
-                  }}
+                  }}  
                   className="text-2xl font-black font-display"
                 >
                   {pkg.biaya_pemasangan === 0
@@ -137,7 +137,7 @@ function PaketDetail() {
             </div>
           </div>
           <div>
-            <div className="p-6 border border-brand-border rounded-2xl sticky top-22">
+            <div className="p-6 border border-brand-border rounded-2xl sticky top-1/2 -translate-y-1/2">
               <div className="uppercase tracking-widest mb-5 font-mono text-brand-muted text-[10px]">
                 Ringkasan
               </div>
@@ -171,7 +171,7 @@ function PaketDetail() {
               </div>
               <button
                 onClick={() => navigate("/login")}
-                className="w-full py-3.5 font-semibold text-sm hover:opacity-90 transition-opacity rounded-xl text-brand-white bg-brand-blue font-display"
+                className="w-full py-3.5 font-semibold text-sm hover:opacity-90 cursor-pointer transition-opacity rounded-xl text-brand-white bg-brand-blue font-display"
               >
                 Berlangganan Sekarang
               </button>

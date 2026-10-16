@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 pb-12 border-b border-brand-border-dark">
             <div className="max-w-xs">
               <LogoBrand textColor="text-brand-white" to="/" />
-              <p className="text-sm leading-relaxed font-body text-[rgba(255,255,255,0.35)] ">
+              <p className="text-sm leading-relaxed mt-2 font-body text-[rgba(255,255,255,0.35)] ">
                 Fiber optik untuk seluruh Indonesia. Terpercaya sejak 2015.
               </p>
             </div>
