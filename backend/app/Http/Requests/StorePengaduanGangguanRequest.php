@@ -29,6 +29,7 @@ class StorePengaduanGangguanRequest extends FormRequest
                 'in:mati_total,koneksi_lambat,kabel_putus,perangkat_rusak,lainnya',
             ],
             'deskripsi_masalah' => 'required|string',
+            'foto_kendala' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 }

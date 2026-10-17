@@ -20,6 +20,7 @@ class PengaduanGangguanResource extends JsonResource
             'tanggal_pengaduan' => $this->tanggal_pengaduan,
             'kategori_pengaduan' => $this->kategori_pengaduan,
             'deskripsi_masalah' => $this->deskripsi_masalah,
+            'foto_kendala' => $this->foto_kendala ? asset('storage/' . $this->foto_kendala) : null,
             'status_penanganan' => $this->status_penanganan,
             'pengguna' => [
                 'id_pengguna' => $this->id_pengguna,

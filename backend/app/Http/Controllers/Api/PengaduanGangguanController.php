@@ -49,10 +49,16 @@ class PengaduanGangguanController extends Controller
             $validated['email']
         )->firstOrFail();
 
+        $fotoPath = null;
+        if ($request->hasFile('foto_kendala')) {
+            $fotoPath = $request->file('foto_kendala')->store('pengaduan', 'public');
+        }
+
         $pengaduan = PengaduanGangguan::create([
             'id_pengguna' => $pengguna->id,
             'kategori_pengaduan' => $validated['kategori_pengaduan'],
             'deskripsi_masalah' => $validated['deskripsi_masalah'],
+            'foto_kendala' => $fotoPath,
             'status_penanganan' => 'pending',
         ]);
 

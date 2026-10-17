@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-#[Fillable(['kode_pengaduan', 'id_pengguna', 'id_teknisi', 'kategori_pengaduan', 'tanggal_pengaduan', 'deskripsi_masalah', 'status_penanganan'])]
+#[Fillable(['kode_pengaduan', 'id_pengguna', 'id_teknisi', 'kategori_pengaduan', 'tanggal_pengaduan', 'deskripsi_masalah', 'foto_kendala', 'status_penanganan'])]
 class PengaduanGangguan extends Model
 {
     use SoftDeletes;
