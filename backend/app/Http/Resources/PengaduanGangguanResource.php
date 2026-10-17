@@ -16,6 +16,7 @@ class PengaduanGangguanResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'kode_pengaduan' => $this->kode_pengaduan,
             'tanggal_pengaduan' => $this->tanggal_pengaduan,
             'kategori_pengaduan' => $this->kategori_pengaduan,
             'deskripsi_masalah' => $this->deskripsi_masalah,
