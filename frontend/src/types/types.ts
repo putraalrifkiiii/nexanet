@@ -89,13 +89,23 @@ export interface Pembayaran {
 
 export interface PengaduanGangguan {
   id: number;
+  kode_pengaduan: string;
   pengguna: Pengguna;
-  teknisi: Teknisi;
+  teknisi?: Teknisi | null;
   kategori_pengaduan: string;
   tanggal_pengaduan: string;
   deskripsi_masalah: string;
+  foto_kendala?: string | null;
   status_penanganan: string;
 }
+
+export interface CreatePengaduanData {
+  email: string;
+  kategori_pengaduan: string;
+  deskripsi_masalah: string;
+  foto_kendala?: File | null;
+}
+
 
 export interface TeknisiLangganan {
   id_teknisi: number;
