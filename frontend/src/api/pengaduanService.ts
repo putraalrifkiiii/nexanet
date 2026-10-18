@@ -34,3 +34,12 @@ export async function createPengaduan(
   );
   return response.data.data;
 }
+
+export async function fetchPengaduanDetail(
+  id: number | string,
+): Promise<PengaduanGangguan> {
+  const response = await apiClient.get<{ data: PengaduanGangguan }>(
+    `/pengaduan/${id}`,
+  );
+  return response.data.data;
+}

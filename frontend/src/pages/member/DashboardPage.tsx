@@ -22,7 +22,7 @@ const DashboardPage = () => {
 
   return (
     <MemberLayout>
-      <div className="max-w-7xl mx-auto px-6 sm:px-0 py-10">
+      <div className="max-w-5xl mx-auto px-6 sm:px-0 py-10">
         <div className="flex items-end justify-between mb-10">
           <div>
             <div className="font-mono text-brand-muted text-[10px] uppercase tracking-widest mb-2">

@@ -4,15 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "@/api/apiService";
 import { useAuth } from "@/context/AuthContext";
 import { createPengaduan, fetchPengaduan } from "@/api/pengaduanService";
-
-function Status({ label }: { label: string }) {
-  return (
-    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50">
-      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-      <span className="font-mono text-emerald-500 text-[11px]">{label}</span>
-    </div>
-  );
-}
+import Status from "@/components/StatusBadge";
 
 type Ticket = {
   id: number;
@@ -212,7 +204,7 @@ const PengaduanPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-3.5 text-sm font-semibold hover:opacity-90 transition-all font-body text-brand-white rounded-[10px] ${sent ? "bg-[#059669]" : "bg-brand-dark"}`}
+                className={`w-full py-3.5 text-sm font-semibold hover:opacity-90 transition-all font-body text-brand-white rounded-[10px] cursor-pointer ${sent ? "bg-[#059669]" : "bg-brand-dark"}`}
               >
                 {sent ? "Pengaduan Terkirim" : "Kirim Pengaduan"}
               </button>
@@ -262,7 +254,7 @@ const PengaduanPage = () => {
                 height="14"
                 viewBox="0 0 14 14"
                 fill="none"
-                className="text-gray-300 group-hover:text-gray-500 transition-colors"
+                className="text-gray-300 group-hover:text-gray-700 transition-colors"
               >
                 <path
                   d="M5 2.5l4.5 4.5-4.5 4.5"
