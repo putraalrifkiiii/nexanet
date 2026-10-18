@@ -57,6 +57,7 @@ class PengaduanGangguanController extends Controller
         $pengaduan = PengaduanGangguan::create([
             'id_pengguna' => $pengguna->id,
             'kategori_pengaduan' => $validated['kategori_pengaduan'],
+            'tanggal_pengaduan' => now(),
             'deskripsi_masalah' => $validated['deskripsi_masalah'],
             'foto_kendala' => $fotoPath,
             'status_penanganan' => 'pending',

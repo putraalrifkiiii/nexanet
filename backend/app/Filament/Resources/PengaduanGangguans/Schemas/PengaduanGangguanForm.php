@@ -2,6 +2,11 @@
 
 namespace App\Filament\Resources\PengaduanGangguans\Schemas;
 
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class PengaduanGangguanForm
@@ -10,23 +15,61 @@ class PengaduanGangguanForm
     {
         return $schema
             ->components([
-                TextInput::make('nama_paket')
+                TextInput::make('kode_pengaduan')
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->placeholder('Otomatis dibuat sistem'),
+
+                Select::make('id_pengguna')
+                    ->label('Pelanggan')
+                    ->relationship('pengguna', 'nama')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+
+                Select::make('id_teknisi')
+                    ->label('Teknisi Bertugas')
+                    ->relationship('teknisi', 'nama_teknisi')
+                    ->searchable()
+                    ->preload()
+                    ->nullable(),
+
+                Select::make('kategori_pengaduan')
+                    ->label('Kategori Gangguan')
+                    ->options([
+                        'mati_total' => 'Mati Total',
+                        'koneksi_lambat' => 'Koneksi Lambat',
+                        'kabel_putus' => 'Kabel Putus',
+                        'perangkat_rusak' => 'Perangkat Rusak',
+                        'lainnya' => 'Lainnya',
+                    ])
                     ->required()
-                    ->maxLength(255)
-                    ->datalist(['Paket Lite', 'Paket Dash', 'Paket Rocket', 'Paket Sonic']),
-                TextInput::make('kecepatan_mbps')
+                    ->default('lainnya'),
+
+                Select::make('status_penanganan')
+                    ->label('Status Penanganan')
+                    ->options([
+                        'pending' => 'Menunggu (Pending)',
+                        'sedang_perjalanan' => 'Sedang Diproses / Perjalanan',
+                        'selesai' => 'Selesai',
+                    ])
                     ->required()
-                    ->numeric()
-                    ->suffix(' Mbps'),
-                TextInput::make('harga')
+                    ->default('pending'),
+
+                DateTimePicker::make('tanggal_pengaduan')
+                    ->label('Waktu Pengaduan')
+                    ->default(now()),
+
+                Textarea::make('deskripsi_masalah')
+                    ->label('Deskripsi Masalah')
                     ->required()
-                    ->numeric()
-                    ->step(50000)
-                    ->prefix('Rp ')
-                    ->suffix(',-'),
-                Textarea::make('deskripsi_paket')
-                    ->maxLength(255)
-                    ->placeholder('Contoh: Paket internet dengan kecepatan tinggi untuk streaming dan gaming.'),
+                    ->columnSpanFull(),
+
+                FileUpload::make('foto_kendala')
+                    ->label('Foto Bukti Kendala')
+                    ->image()
+                    ->directory('pengaduan')
+                    ->columnSpanFull(),
             ]);
     }
 }
